@@ -4,6 +4,13 @@ on:
     branches:
       - main
   pull_request:
+  workflow_call:
+    inputs:
+      destroy:
+        description: 'binary action' 
+        default: false
+        required: true
+        type: string 
 permissions:
       id-token: write # This is required for aws oidc connection
       contents: read # This is required for actions/checkout
@@ -101,4 +108,6 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: echo ${{ github.ref }} ;   echo ${{ github.event_name }} ;  terraform apply -auto-approve -input=false
 
-        
+      - name: Terraform Destroy
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push' && ${{ inputs.destroy }} == true
+        run: terraform destroy -auto-approve  
