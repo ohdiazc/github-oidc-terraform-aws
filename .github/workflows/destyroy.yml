@@ -5,11 +5,11 @@ on:
       destroy:
         description: 'delete'
         required: true
-        default: 'no'
+        default: NO
         type: choice
         options:
-          - yes
-          - no
+          - YES
+          - NO
 permissions:
       id-token: write # This is required for aws oidc connection
       contents: read # This is required for actions/checkout
@@ -57,5 +57,5 @@ jobs:
         run: terraform validate -no-color
       
       - name: Terraform Destroy
-        if: ${{ inputs.destroy }}
+        if: ${{ inputs.destroy == 'YES' }}
         run: echo ${{ inputs.destroy  }} ; terraform destroy -auto-approve  
