@@ -1,12 +1,15 @@
 name: "Terraform action delete"
 on:
-  workflow_call:
+ workflow_dispatch:
     inputs:
-      destroy:
-        description: 'binary action' 
-        default: false
+      envdep:
+        description: 'delete'
         required: true
-        type: boolean
+        default: 'no'
+        type: choice
+        options:
+          - yes
+          - no
 permissions:
       id-token: write # This is required for aws oidc connection
       contents: read # This is required for actions/checkout
