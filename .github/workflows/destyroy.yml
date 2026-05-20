@@ -57,5 +57,5 @@ jobs:
         run: terraform validate -no-color
       
       - name: Terraform Destroy
-        #if: ${{ inputs.destroy == 'true' }}
+        if: ${{ inputs.destroy == true }}
         run: echo ${{ inputs.destroy  }} ; terraform destroy -auto-approve  
