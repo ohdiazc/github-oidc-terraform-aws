@@ -1,4 +1,4 @@
-name: "Terraform action"
+name: "Terraform action delete"
 on:
   workflow_call:
     inputs:
