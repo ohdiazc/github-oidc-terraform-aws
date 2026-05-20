@@ -2,7 +2,7 @@ name: "Terraform action delete"
 on:
  workflow_dispatch:
     inputs:
-      envdep:
+      destroy:
         description: 'delete'
         required: true
         default: 'no'
@@ -57,5 +57,5 @@ jobs:
         run: terraform validate -no-color
       
       - name: Terraform Destroy
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push' && ${{ inputs.destroy }} == 'true' 
+        if: ${{ inputs.destroy }}
         run: echo ${{ inputs.destroy  }} ; terraform destroy -auto-approve  
